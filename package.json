@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "tailwind.config.js",
 	"scripts": {
-		"dev": "postcss ./public/css/input.css -o ./public/css/main.min.css -w",
-		"start": "postcss ./public/css/input.css -o ./public/css/main.min.css"
+		"dev": "postcss ./public/css/input.css -o ./public/css/output.css --watch",
+		"start": "postcss ./public/css/input.css -o ./public/css/output.css"
 	},
 	"repository": {
 		"type": "git",
