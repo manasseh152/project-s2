@@ -1,5 +1,5 @@
 {
-	"name": "mvc-oop-pdo-proeftoets-userstory",
+	"name": "project-s2",
 	"version": "1.0.0",
 	"description": "",
 	"main": "tailwind.config.js",
@@ -9,15 +9,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/NijsvanDuin/mvc-oop-pdo-proeftoets-userstory.git"
+		"url": "git+https://github.com/manasseh152/project-s2.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/NijsvanDuin/mvc-oop-pdo-proeftoets-userstory/issues"
+		"url": "https://github.com/manasseh152/project-s2/issues"
 	},
-	"homepage": "https://github.com/NijsvanDuin/mvc-oop-pdo-proeftoets-userstory#readme",
+	"homepage": "https://github.com/manasseh152/project-s2#readme",
 	"devDependencies": {
 		"autoprefixer": "^10.4.13",
 		"daisyui": "^2.47.0",
