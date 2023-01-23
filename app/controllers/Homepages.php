@@ -1,4 +1,11 @@
 <?php
+
+
+namespace App\Controllers;
+
+use App\Libraries\Controller;
+
+
 class HomePages extends Controller
 {
 
@@ -7,6 +14,7 @@ class HomePages extends Controller
     $data = [
       'title' => "Homepage MVC OOP Framework"
     ];
+    // $this->view('homepages/index', $data);
     $this->view('homepages/index', $data);
   }
 }

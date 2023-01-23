@@ -1,17 +1,24 @@
 <?php
+
+namespace App\Libraries;
+
+use \Twig\Loader\FilesystemLoader;
+use \Twig\Environment;
+
 /**
  * 
  */
-class Core {
+class Core
+{
+
+  protected static $twig;
   protected $currentController = 'Homepages';
   protected $currentMethod = 'index';
   protected $params = [];
 
   public function __construct()
   {
-    /**
-     * 
-     */
+    $this->setTwigInstance();
     // var_dump($this->getURL());
     $url = $this->getURL();
     // var_dump($url);exit();
@@ -23,10 +30,9 @@ class Core {
       // echo $this->currentController;exit();
       unset($url[0]);
     }
-    // Als de controller niet bestaat, dan is hij gelijk aan pages
-    require_once '../app/controllers/' . $this->currentController . ".php";
 
     // Maak een nieuwe instantie van de controllerClass
+    $this->currentController = "\\App\\Controllers\\$this->currentController";
     $this->currentController = new $this->currentController();
 
     // Kijk naar het tweede gedeelte van de url en zet de method
@@ -37,24 +43,39 @@ class Core {
       }
     }
 
-    $this->params = $url ? array_values($url): [];
+    $this->params = $url ? array_values($url) : [];
 
     call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
   }
 
-  public function getURL() {
+  public function getURL()
+  {
     // de $_GET['url'] komt van /public/.htaccess regel 7
     if (isset($_GET['url'])) {
       // Haal de backslash vooraan de url af
       $url = rtrim($_GET['url'], '/');
 
       $url = filter_var($url, FILTER_SANITIZE_URL);
-      
-      $url = explode('/', $url);     
+
+      $url = explode('/', $url);
       return $url;
-    } else {      
+    } else {
       return array('homepages', 'index');
     }
+  }
 
+  public function setTwigInstance()
+  {
+    $loader = new FilesystemLoader('../app/views');
+    self::$twig = new Environment($loader, [
+      'cache' => false,
+      'debug' => true
+    ]);
+    // self::$twig->addExtension(new \Twig\Extension\DebugExtension());
+  }
+
+  public static function getTwig()
+  {
+    return self::$twig;
   }
 }
