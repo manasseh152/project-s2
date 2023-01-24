@@ -6,6 +6,6 @@ define('DB_NAME', 'projects2');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
-define('URLROOT', 'http://localhost:8080');
+define('URLROOT', 'http://localhost:3000');
 
 define('SITENAME', 'MVC Framework oefenToets');
