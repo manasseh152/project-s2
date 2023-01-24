@@ -2,9 +2,9 @@
 -- Voer elk @BLOCK afzonderlijk uit in de database
 -- LET OP: de @BLOCK's zijn afhankelijk van elkaar, dus uitvoeren in volgorde
 -- @BLOCK
-DROP DATABASE IF EXISTS `project`;
-CREATE DATABASE `project`;
-USE `project`;
+DROP DATABASE IF EXISTS `projects2`;
+CREATE DATABASE `projects2`;
+USE `projects2`;
 -- Table: `Role`
 -- Columns: `id`, `name`, `description`, `is_active`, `created_at`, `updated_at`
 DROP TABLE IF EXISTS `Role`;
@@ -64,7 +64,7 @@ CREATE TABLE `UserInformation` (
   CONSTRAINT `UserInformation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- Table: `Reservation`
--- Columns: `id`, `user_id`, `date`, `time`, `number_of_people`, `status`, `created_at`, `updated_at`
+-- Columns: `id`, `user_id`, `date`, `time`, `number_of_people`, `has_children`, `status`, `created_at`, `updated_at`
 DROP TABLE IF EXISTS `Reservation`;
 CREATE TABLE `Reservation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -72,6 +72,7 @@ CREATE TABLE `Reservation` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `number_of_people` int(11) NOT NULL,
+  `has_children` tinyint(1) NOT NULL DEFAULT '0',
   `status` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
