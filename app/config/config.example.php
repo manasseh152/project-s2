@@ -2,10 +2,10 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'BE-Oefentoets-MVC');
+define('DB_NAME', 'projects2');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
-define('URLROOT', 'http://local.project.gg');
+define('URLROOT', 'http://localhost:8080');
 
 define('SITENAME', 'MVC Framework oefenToets');

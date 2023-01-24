@@ -50,10 +50,10 @@ class Core
 
   public function getURL()
   {
-    // de $_GET['url'] komt van /public/.htaccess regel 7
-    if (isset($_GET['url'])) {
+    // de $_SERVER['REQUEST_URI'] komt van /public/.htaccess regel 7
+    if (isset($_SERVER['REQUEST_URI'])) {
       // Haal de backslash vooraan de url af
-      $url = rtrim($_GET['url'], '/');
+      $url = rtrim($_SERVER['REQUEST_URI'], '/');
 
       $url = filter_var($url, FILTER_SANITIZE_URL);
 
