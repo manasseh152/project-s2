@@ -30,3 +30,4 @@ Welkom bij onze github van ons project voor het komende semester
 - [Prettier](https://prettier.io/)
 - [Composer](https://getcomposer.org/)
 - [Node.js](https://nodejs.org/en/)
+- [Twig](https://twig.symfony.com/)
