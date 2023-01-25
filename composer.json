@@ -2,7 +2,8 @@
   "name": "manas/project-s2",
   "require": {
     "twig/twig": "^3.5",
-    "symfony/var-dumper": "^6.2"
+    "symfony/var-dumper": "^6.2",
+    "vlucas/phpdotenv": "^5.5"
   },
   "autoload": {
     "psr-4": {
