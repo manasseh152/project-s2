@@ -21,6 +21,7 @@ class Core
     $this->setTwigInstance();
     // var_dump($this->getURL());
     $url = $this->getURL();
+
     // var_dump($url);exit();
     // var_dump($url);echo '../app/controllers/' . ucwords($url[0]) . '.php';exit();
     // We hebben ../nodig omdat we Core.php require vanuit index.php
@@ -58,6 +59,9 @@ class Core
       $url = filter_var($url, FILTER_SANITIZE_URL);
 
       $url = explode('/', $url);
+
+      array_shift($url);
+
       return $url;
     } else {
       return array('homepages', 'index');

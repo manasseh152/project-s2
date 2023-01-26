@@ -19,7 +19,7 @@ class HomePages extends Controller
   {
     $users = $this->userModel->getUsers();
     $data = [
-      'title' => "Homepage MVC OOP Framework",
+      'title' => "Home",
       'users' => $users
     ];
     // $this->view('homepages/index', $data);

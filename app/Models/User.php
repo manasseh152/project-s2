@@ -12,6 +12,10 @@ class User extends Model
     {
         return $this->select()->get();
     }
+    public function getUserByEmail($email)
+    {
+        return $this->select()->whereRaw('email = :email', ['email', $email])->get();
+    }
     public function creatUser($user)
     {
         $password = password_hash($user['password'], PASSWORD_DEFAULT);

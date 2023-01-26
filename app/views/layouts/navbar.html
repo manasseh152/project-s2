@@ -44,6 +44,19 @@
     </ul>
   </div>
   <div class="navbar-end">
-
+    {% if user %}
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" class="m-2">
+        <img class="avatar" src="https://i.pravatar.cc/300" alt="Avatar">
+      </div>
+      <ul tabindex="0" class="menu dropdown-content w-52">
+        <li><a>Profile</a></li>
+        <li><a>Settings</a></li>
+        <li><a>Logout</a></li>
+      </ul>
+    </div>
+    {% else %}
+    <a href="/auth/login" class="btn btn-primary">Login</a>
+    {% endif %}
   </div>
 </nav>

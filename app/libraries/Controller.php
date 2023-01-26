@@ -3,7 +3,6 @@
 namespace App\Libraries;
 
 use App\Libraries\Core;
-use \Twig\Lexer;
 
 // Dit wordt de parentclass van alle andere controller
 // We loaden de model en de view
