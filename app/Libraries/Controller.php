@@ -19,7 +19,7 @@ class Controller
   {
     if (!file_exists('../app/views/' . $view . '.html')) die('View bestaat niet');
     $twig = Core::getTwig();
-    $twig->addGlobal("URLROOT", URLROOT);
+    $twig->addGlobal("URLROOT", $_ENV['APP_URL']);
     $template = $twig->render($view . '.html', $data);
     echo $template;
   }
