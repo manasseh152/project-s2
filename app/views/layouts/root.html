@@ -10,9 +10,11 @@
 	{% block head %}{% endblock %}
 </head>
 
-<body>
+<body class="grid grid-rows-layout h-screen bg-base-200">
 	{% include "./layouts/navbar.html" %}
-	{% block body %}{% endblock %}
+	<main class="overflow-auto">
+		{% block body %}{% endblock %}
+	</main>
 </body>
 
 </html>
