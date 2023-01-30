@@ -2,38 +2,214 @@
 -- Voer elk @BLOCK afzonderlijk uit in de database
 -- LET OP: de @BLOCK's zijn afhankelijk van elkaar, dus uitvoeren in volgorde
 -- @BLOCK
-DROP DATABASE IF EXISTS `projects2`;
-CREATE DATABASE `projects2`;
-USE `projects2`;
--- Table: `Role`
--- Columns: `id`, `name`, `description`, `is_active`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `Role`;
-CREATE TABLE `Role` (
+DROP DATABASE IF EXISTS `project`;
+CREATE DATABASE `project`;
+USE `project`;
+-- Table: pictures
+-- Columns: id: BINARY(16), description: varchar(255), path: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `pictures`;
+CREATE TABLE `pictures` (
+  `id` BINARY(16) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `path` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: categories
+-- Columns: id: BINARY(16), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` BINARY(16) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_items
+-- Columns: id: int(11), name: varchar(255), description: varchar(255), price: decimal(10,2), amount: int(11), unit: varchar(10), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_items`;
+CREATE TABLE `menu_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `unit` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_item_pictures
+-- Columns: id: int(11), menu_item_id: int(11), picture_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_item_pictures`;
+CREATE TABLE `menu_item_pictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_item_id` int(11) NOT NULL,
+  `picture_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `menu_item_id` (`menu_item_id`),
+  KEY `picture_id` (`picture_id`),
+  CONSTRAINT `menu_item_pictures_ibfk_1` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`id`),
+  CONSTRAINT `menu_item_pictures_ibfk_2` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_item_categories
+-- Columns: id: int(11), menu_item_id: int(11), category_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_item_categories`;
+CREATE TABLE `menu_item_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_item_id` int(11) NOT NULL,
+  `category_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `menu_item_id` (`menu_item_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `menu_item_categories_ibfk_1` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`id`),
+  CONSTRAINT `menu_item_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu
+-- Columns: id: int(11), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_pictures
+-- Columns: id: int(11), menu_id: int(11), picture_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_pictures`;
+CREATE TABLE `menu_pictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) NOT NULL,
+  `picture_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`),
+  KEY `picture_id` (`picture_id`),
+  CONSTRAINT `menu_pictures_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+  CONSTRAINT `menu_pictures_ibfk_2` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_categories
+-- Columns: id: int(11), menu_id: int(11), category_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_categories`;
+CREATE TABLE `menu_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) NOT NULL,
+  `category_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `menu_categories_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+  CONSTRAINT `menu_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: menu_connectors
+-- Columns: id: int(11), menu_id: int(11), menu_item_id: int(11), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `menu_connectors`;
+CREATE TABLE `menu_connectors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) NOT NULL,
+  `menu_item_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`),
+  KEY `menu_item_id` (`menu_item_id`),
+  CONSTRAINT `menu_connectors_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+  CONSTRAINT `menu_connectors_ibfk_2` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: locations
+-- Columns: id: int(11), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: location_pictures
+-- Columns: id: int(11), location_id: int(11), picture_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `location_pictures`;
+CREATE TABLE `location_pictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
+  `picture_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `location_id` (`location_id`),
+  KEY `picture_id` (`picture_id`),
+  CONSTRAINT `location_pictures_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
+  CONSTRAINT `location_pictures_ibfk_2` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: location_categories
+-- Columns: id: int(11), location_id: int(11), category_id: BINARY(16), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `location_categories`;
+CREATE TABLE `location_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
+  `category_id` BINARY(16) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `location_id` (`location_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `location_categories_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
+  CONSTRAINT `location_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: roles
+-- Columns: id: int(11), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: users
+-- Columns: id: int(11), email: varchar(255), password: varchar(255), access_token: varchar(255), is_active: tinyint(1), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `access_token` varchar(255) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `User`
--- Columns: `id`, `email`, `password`, `is_active`, `updated_at`, `created_at`
-DROP TABLE IF EXISTS `User`;
-CREATE TABLE `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `UserRole`
--- Columns: `id`, `user_id`, `role_id`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `UserRole`;
-CREATE TABLE `UserRole` (
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: user_roles
+-- Columns: id: int(11), user_id: int(11), role_id: int(11), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `user_roles`;
+CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
@@ -42,110 +218,100 @@ CREATE TABLE `UserRole` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `role_id` (`role_id`),
-  CONSTRAINT `UserRole_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `UserRole_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `UserInformation`
--- Columns: `id`, `user_id`, `first_name`, `last_name`, `address`, `postal_code`, `city`, `phone_number`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `UserInformation`;
-CREATE TABLE `UserInformation` (
+  CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: opening_hours
+-- Columns: id: int(11), location_id: int(11), day: int(11), open: time, close: time, date?: date, created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `opening_hours`;
+CREATE TABLE `opening_hours` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
+  `day` int(11) NOT NULL,
+  `open` time NOT NULL,
+  `close` time NOT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `location_id` (`location_id`),
+  CONSTRAINT `opening_hours_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: location_reviews
+-- Columns: id: int(11), location_id: int(11), user_id: int(11), rating: int(11), data: json, created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `location_reviews`;
+CREATE TABLE `location_reviews` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `data` json DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `location_id` (`location_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `location_reviews_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
+  CONSTRAINT `location_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: Customers
+-- Columns: id: int(11), user_id?: int(11), first_name: varchar(255), last_name: varchar(255), email: varchar(255), phone: varchar(255), is_active: tinyint(1), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `Customers`;
+CREATE TABLE `Customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `postal_code` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `UserInformation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `Reservation`
--- Columns: `id`, `user_id`, `date`, `time`, `number_of_people`, `has_children`, `status`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `Reservation`;
-CREATE TABLE `Reservation` (
+  CONSTRAINT `Customers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: seating
+-- Columns: id: int(11), location_id: int(11), name: varchar(255), regular_seats: int(11), child_seats: int(11), data: json, created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `seating`;
+CREATE TABLE `seating` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `regular_seats` int(11) NOT NULL,
+  `child_seats` int(11) NOT NULL,
+  `data` json DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `location_id` (`location_id`),
+  CONSTRAINT `seating_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Table: reservations
+-- Columns: id: int(11), location_id: int(11), customer_id: int(11), seating_id: int(11), date: date, from: time, to: time, discount: decimal(10,2), total: decimal(10,2), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `reservations`;
+CREATE TABLE `reservations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `seating_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
-  `number_of_people` int(11) NOT NULL,
-  `has_children` tinyint(1) NOT NULL DEFAULT '0',
-  `status` varchar(255) NOT NULL,
+  `from` time NOT NULL,
+  `to` time NOT NULL,
+  `discount` decimal(10,2) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `Reservation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `Product`
--- Columns: `id`, `name`, `description`, `price`, `is_active`, `created_by`, `created_at`, `updated_by`, `updated_at`
-DROP TABLE IF EXISTS `Product`;
-CREATE TABLE `Product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `price` decimal(10, 2) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_by` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `created_by` (`created_by`),
-  KEY `updated_by` (`updated_by`),
-  CONSTRAINT `Product_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Product_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `Category`
--- Columns: `id`, `name`, `description`, `is_active`, `created_by`, `created_at`, `updated_by`, `updated_at`
-DROP TABLE IF EXISTS `Category`;
-CREATE TABLE `Category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_by` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `created_by` (`created_by`),
-  KEY `updated_by` (`updated_by`),
-  CONSTRAINT `Category_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Category_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `ProductCategory`
--- Columns: `id`, `product_id`, `category_id`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `ProductCategory`;
-CREATE TABLE `ProductCategory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `category_id` (`category_id`),
-  CONSTRAINT `ProductCategory_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ProductCategory_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- Table: `ProductImage`
--- Columns: `id`, `product_id`, `image_url`, `created_at`, `updated_at`
-DROP TABLE IF EXISTS `ProductImage`;
-CREATE TABLE `ProductImage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
-  `image_url` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `ProductImage_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
--- @BLOCK
--- View: ``
--- @BLOCK
--- PROCEDURE: ``
+  KEY `location_id` (`location_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `seating_id` (`seating_id`),
+  CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
+  CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `Customers` (`id`),
+  CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`seating_id`) REFERENCES `seating` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
