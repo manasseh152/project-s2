@@ -26,6 +26,7 @@ class Core
     // var_dump($url);echo '../app/controllers/' . ucwords($url[0]) . '.php';exit();
     // We hebben ../nodig omdat we Core.php require vanuit index.php
     if (isset($url[0]) && file_exists('../app/Controllers/' . ucwords($url[0]) . '.php')) {
+      // Zet de currentController gelijk aan het eerste woord na het domein
       $this->currentController = ucwords($url[0]);
       // echo $this->currentController;exit();
       unset($url[0]);
