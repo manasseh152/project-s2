@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.php"
+    "./app/views/**/*.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        layout: "auto 1fr",
+      }
+    },
   },
   plugins: [require("daisyui")],
 }

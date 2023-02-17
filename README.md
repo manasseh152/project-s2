@@ -9,9 +9,10 @@ Welkom bij onze github van ons project voor het komende semester
 1. Clone de repository
 2. Open de map in een IDE (bijvoorbeeld IntelliJ)
 3. Voer het volgende commando uit in de terminal: ```npm install```
-4. Voer het volgende commando uit in de terminal: ```npm run dev```
-5. Voeg een nieuwe virtual host toe met als url: ```http://local.project.gg```
-6. Open de url in je browser
+4. Voer het volgende commando uit in de terminal: ```composer install```
+5. Voer het volgende commando uit in de terminal: ```npm run dev``` of ```./serve.dev.sh```
+6. Voeg een nieuwe virtual host toe met als url: ```http://local.project.gg```
+7. Open de url in je browser
 
 ### Database
 
@@ -27,3 +28,6 @@ Welkom bij onze github van ons project voor het komende semester
 - [Tailwind CSS](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 - [Prettier](https://prettier.io/)
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/en/)
+- [Twig](https://twig.symfony.com/)

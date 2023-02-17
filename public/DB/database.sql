@@ -136,16 +136,33 @@ CREATE TABLE `menu_connectors` (
   CONSTRAINT `menu_connectors_ibfk_2` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- Table: addresses
+-- Columns: id: int(11), street: varchar(255), city: varchar(255), state: varchar(255), zip: varchar(255), created_at: timestamp, updated_at: timestamp
+DROP TABLE IF EXISTS `addresses`;
+CREATE TABLE `addresses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `street` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `zip` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Table: locations
--- Columns: id: int(11), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
+-- Columns: id: int(11), address_id: int(11), name: varchar(255), description: varchar(255), created_at: timestamp, updated_at: timestamp
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `address_id` (`address_id`),
+  CONSTRAINT `locations_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Table: location_pictures
@@ -197,7 +214,7 @@ CREATE TABLE `roles` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `access_token` varchar(255) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
@@ -257,10 +274,10 @@ CREATE TABLE `location_reviews` (
   CONSTRAINT `location_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Table: Customers
+-- Table: customers
 -- Columns: id: int(11), user_id?: int(11), first_name: varchar(255), last_name: varchar(255), email: varchar(255), phone: varchar(255), is_active: tinyint(1), created_at: timestamp, updated_at: timestamp
-DROP TABLE IF EXISTS `Customers`;
-CREATE TABLE `Customers` (
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -272,7 +289,7 @@ CREATE TABLE `Customers` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `Customers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Table: seating
@@ -312,6 +329,6 @@ CREATE TABLE `reservations` (
   KEY `customer_id` (`customer_id`),
   KEY `seating_id` (`seating_id`),
   CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`),
-  CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `Customers` (`id`),
+  CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
   CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`seating_id`) REFERENCES `seating` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
