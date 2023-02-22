@@ -16,4 +16,13 @@ class LoginPages extends Controller
     // $this->view('homepages/index', $data);
     $this->view('loginpages/index', $data);
   }
+
+public function forgot()
+  {
+    $data = [
+      'title' => "Forget Password",
+    ];
+    // $this->view('homepages/index', $data);
+    $this->view('loginpages/forgot', $data);
+  }
 }
