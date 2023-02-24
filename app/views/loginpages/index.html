@@ -1,12 +1,10 @@
 {% extends "layouts/root.html" %}
 
 {% block body %}
-<div class="min-h-screen">
+<div>
 
   <!-- component -->
-  <script
-    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
-    defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
   <div class="container max-w-full mx-auto py-24 px-6">
     <div class="font-sans">
@@ -18,8 +16,7 @@
                 <div class="mx-auto max-w-lg">
                   <div class="py-2">
                     <span class="px-1 text-sm text-gray-600">E-mail</span>
-                    <input placeholder="" type="text"
-                      class="text-md block px-3 py-2 rounded-lg w-full
+                    <input placeholder="" type="text" class="text-md block px-3 py-2 rounded-lg w-full
                       bg-white border-2 border-gray-300 placeholder-gray-600
                       shadow-md focus:placeholder-gray-500 focus:bg-white
                       focus:border-gray-600 focus:outline-none">
@@ -27,8 +24,7 @@
                   <div class="py-2" x-data="{ show: true }">
                     <span class="px-1 text-sm text-gray-600">Password</span>
                     <div class="relative">
-                      <input placeholder="" :type="show ? 'password' : 'text'"
-                        class="text-md block px-3 py-2 rounded-lg w-full
+                      <input placeholder="" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full
                         bg-white border-2 border-gray-300 placeholder-gray-600
                         shadow-md
                         focus:placeholder-gray-500
@@ -39,12 +35,9 @@
                         items-center text-sm leading-5">
 
                         <svg class="h-6 text-gray-700" fill="none" @click="show=
-                          !show"
-                          :class="{'hidden': !show, 'block':show }"
-                          xmlns="http://www.w3.org/2000/svg"
+                          !show" :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
                           viewbox="0 0 576 512">
-                          <path fill="currentColor"
-                            d="M572.52 241.4C518.29 135.59 410.93 64 288
+                          <path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288
                             64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0
                             29.19C57.71 376.41 165.07 448 288 448s230.32-71.64
                             284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144
@@ -55,12 +48,9 @@
                         </svg>
 
                         <svg class="h-6 text-gray-700" fill="none" @click="show=
-                          !show"
-                          :class="{'block': !show, 'hidden':show }"
-                          xmlns="http://www.w3.org/2000/svg"
+                          !show" :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
                           viewbox="0 0 640 512">
-                          <path fill="currentColor"
-                            d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2
+                          <path fill="currentColor" d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2
                             185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35
                             32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320
                             448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13
@@ -83,24 +73,22 @@
                       </div>
                     </div>
                   </div>
-                  <div class="flex justify-between"><label class="block
-                      text-gray-500 font-bold my-4"><input type="checkbox"
-                        class="leading-loose text-pink-600"> <span class="py-2
+                  <div class="flex justify-between">
+                    <label class="block
+                      text-gray-500 font-bold my-4">
+                      <input type="checkbox" class="leading-loose text-pink-600"> <span class="py-2
                         text-sm text-gray-600 leading-snug"> Remember
                         Me </span></label> <label class="block text-gray-500
-                      font-bold my-4"><a
-                        href="./forgot"
-                        class="cursor-pointer tracking-tighter text-black
+                      font-bold my-4"><a href="./forgot" class="cursor-pointer tracking-tighter text-black
                         border-b-2 border-gray-200 hover:border-gray-400"><span>Forgot
-                          Password?</span></a></label></div> <button class="mt-3
+                          Password?</span></a></label>
+                  </div> <button class="mt-3
                     text-lg font-semibold
                     bg-gray-800 w-full text-white rounded-lg
                     px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                     Login
                   </button>
-                  <a
-                    href="../registerpages/index"
-                    class="cursor-pointer tracking-tighter text-black border-b-2
+                  <a href="../registerpages/index" class="cursor-pointer tracking-tighter text-black border-b-2
                     border-gray-200 hover:border-gray-400"><span>Don't have an
                       account? Sign up</span></a>
                 </div>
