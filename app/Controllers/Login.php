@@ -6,18 +6,17 @@ namespace App\Controllers;
 use App\Libraries\Controller;
 
 
-class LoginPages extends Controller
+class Login extends Controller
 {
   public function index()
   {
     $data = [
       'title' => "Login",
     ];
-    // $this->view('homepages/index', $data);
     $this->view('loginpages/index', $data);
   }
 
-public function forgot()
+  public function forgot()
   {
     $data = [
       'title' => "Forget Password",

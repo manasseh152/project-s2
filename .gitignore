@@ -4,3 +4,4 @@ app/config/config.php
 output.css
 package-lock.json
 composer-lock.json
+.env
