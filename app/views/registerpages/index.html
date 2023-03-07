@@ -20,13 +20,21 @@
           <label class="label">
             <span class="label-text">Password</span>
           </label>
-          <input name="password" type="password" placeholder="password" class="input input-bordered" />
+          <div class="relative w-full">
+            <input name="password" type="password" placeholder="password" class="input input-bordered" id="wachtwoord" />
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+              <p class="font-semibold text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer"  onclick="showPassword()" id="showButton">Show</p>
+          </div>
         </div>
         <div class="form-control">
           <label class="label">
             <span class="label-text">Confirm Password</span>
           </label>
-          <input name="password2" type="password" placeholder="confirm password" class="input input-bordered" />
+          <div class="relative w-full">
+            <input name="password2" type="password" placeholder="password" class="input input-bordered" id="wachtwoord2" />
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+              <p class="font-semibold text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer"  onclick="showConfirmPassword()" id="showButton2">Show</p>
+          </div>
           <div class="form-control mt-6">
             <button class="btn btn-primary" type="submit">Register</button>
           </div>

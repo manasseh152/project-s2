@@ -14,3 +14,25 @@ function GetSWE() {
 }).then(response => response.json())
 .then(data => console.log(data));
 }
+
+function showPassword() {
+  var x = document.getElementById("wachtwoord");
+  if (x.type === "password") {
+    x.type = "text";
+    document.getElementById("showButton").innerHTML = "Hide";
+  } else {
+    x.type = "password";
+    document.getElementById("showButton").innerHTML = "Show";
+  }
+}
+
+function showConfirmPassword() {
+  var x = document.getElementById("wachtwoord2");
+  if (x.type === "password") {
+    x.type = "text";
+    document.getElementById("showButton2").innerHTML = "Hide";
+  } else {
+    x.type = "password";
+    document.getElementById("showButton2").innerHTML = "Show";
+  }
+}
