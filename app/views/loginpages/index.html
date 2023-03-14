@@ -18,15 +18,15 @@
           <input type="text" placeholder="email" class="input input-bordered" />
         </div>
         <div class="form-control">
-          <label class="label">
+          <label class="label flex-col items-start" data-show-password>
             <span class="label-text">Password</span>
+            <div class="flex relative items-center w-full">
+              <input type="password" name="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+              <button type="button" onclick="c" class="absolute right-0 ">
+                icon
+              </button>
+            </div>
           </label>
-          <div class="relative w-full">
-            <input type="password" placeholder="password" class="input input-bordered" id="wachtwoord" />
-            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-              <p class="font-semibold text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer"  onclick="showPassword()" id="showButton">Show</p>
-          </div>
-          </div>
           <label class="label">
             <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
           </label>

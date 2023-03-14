@@ -8,40 +8,36 @@
       <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
     </div>
-    <div class="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+    <div class="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 form-control">
       <div class="card-body">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Username</span>
-          </label>
-          <input name="username" type="text" placeholder="Username" class="input input-bordered" />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <div class="relative w-full">
-            <input name="password" type="password" placeholder="password" class="input input-bordered" id="wachtwoord" />
-            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-              <p class="font-semibold text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer"  onclick="showPassword()" id="showButton">Show</p>
+        <label class="label flex-col items-start">
+          <span class="label-text">Email</span>
+          <input type="text" name="email" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        </label>
+        <label class="label flex-col items-start" data-show-password>
+          <span class="label-text">Password</span>
+          <div class="flex relative items-center w-full">
+            <input type="password" name="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <button type="button" onclick="c" class="absolute right-0 ">
+              icon
+            </button>
           </div>
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Confirm Password</span>
-          </label>
-          <div class="relative w-full">
-            <input name="password2" type="password" placeholder="password" class="input input-bordered" id="wachtwoord2" />
-            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-              <p class="font-semibold text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer"  onclick="showConfirmPassword()" id="showButton2">Show</p>
+        </label>
+        <label class="label flex-col items-start" data-show-password>
+          <span class="label-text">Confirm password</span>
+          <div class="flex relative items-center w-full">
+            <input type="password" name="confirmPassword" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <button type="button" onclick="c" class="absolute right-0 ">
+              icon
+            </button>
           </div>
-          <div class="form-control mt-6">
-            <button class="btn btn-primary" type="submit">Register</button>
-          </div>
-          <a href="/login/" class="link link-primary">
-            Already have an account? Login
-          </a>
+        </label>
+        <div class="form-control mt-6">
+          <button class="btn btn-primary" type="submit">Register</button>
         </div>
+        <a href="/login/" class="link link-primary">
+          Already have a account? Login
+        </a>
       </div>
     </div>
 </form>
