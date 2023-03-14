@@ -2,12 +2,11 @@
 
 namespace App\Libraries;
 
+use App\Exceptions\Container\ContainerException;
+use App\Support\Container;
 use \Twig\Loader\FilesystemLoader;
 use \Twig\Environment;
 
-/**
- * 
- */
 class Core
 {
 
@@ -15,6 +14,8 @@ class Core
   protected $currentController = 'Homepages';
   protected $currentMethod = 'index';
   protected $params = [];
+
+  public static Container $container;
 
   public function __construct()
   {
@@ -81,5 +82,48 @@ class Core
   public static function getTwig()
   {
     return self::$twig;
+  }
+
+
+  public static function boot()
+  {
+    static::$container = new Container();
+  }
+
+
+  /**
+   * Register a new binding in the container
+   * @param string $id
+   * @param string|callable $concrete
+   * @return mixed
+   */
+  public static function make(string $id, string|callable $concrete): mixed
+  {
+    return static::$container->bind($id, $concrete);
+  }
+
+  /**
+   * Register a new binding in the container as a singleton
+   * @param string $id
+   * @param string|callable|object $concrete
+   * @return mixed
+   */
+  public function singleton(string $id, string|callable|object $concrete): mixed
+  {
+    return static::$container->bind($id, $concrete, true);
+  }
+
+  /**
+   * Get the value of a binding from the container
+   * @param string $id
+   * @return mixed
+   */
+  public function get(string $id): mixed
+  {
+    try {
+      return static::$container->get($id);
+    } catch (ContainerException | \Exception $exception) {
+      error($exception, "ERROR: Something went wrong when resolving the dependency's");
+    }
   }
 }

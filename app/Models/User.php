@@ -4,7 +4,7 @@ namespace App\Models;
 
 class User extends Model
 {
-  protected $fillable = ['username', 'password', 'updated_at', 'created_at'];
+  static array $fillable = ['username', 'password', 'updated_at', 'created_at'];
 
   public static function findUserByUsername($username)
   {
@@ -22,7 +22,7 @@ class User extends Model
   {
     $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-    $user = self::create([
+    $user = self::insert([
       'username' => $username,
       'password' => $hashed,
     ]);
