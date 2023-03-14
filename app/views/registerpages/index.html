@@ -8,32 +8,36 @@
       <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
     </div>
-    <div class="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+    <div class="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 form-control">
       <div class="card-body">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Username</span>
-          </label>
-          <input name="username" type="text" placeholder="Username" class="input input-bordered" />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <input name="password" type="password" placeholder="password" class="input input-bordered" />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Confirm Password</span>
-          </label>
-          <input name="password2" type="password" placeholder="confirm password" class="input input-bordered" />
-          <div class="form-control mt-6">
-            <button class="btn btn-primary" type="submit">Register</button>
+        <label class="label flex-col items-start">
+          <span class="label-text">Email</span>
+          <input type="text" name="email" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        </label>
+        <label class="label flex-col items-start" data-show-password>
+          <span class="label-text">Password</span>
+          <div class="flex relative items-center w-full">
+            <input type="password" name="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <button type="button" onclick="c" class="absolute right-0 ">
+              icon
+            </button>
           </div>
-          <a href="/login/" class="link link-primary">
-            Already have an account? Login
-          </a>
+        </label>
+        <label class="label flex-col items-start" data-show-password>
+          <span class="label-text">Confirm password</span>
+          <div class="flex relative items-center w-full">
+            <input type="password" name="confirmPassword" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <button type="button" onclick="c" class="absolute right-0 ">
+              icon
+            </button>
+          </div>
+        </label>
+        <div class="form-control mt-6">
+          <button class="btn btn-primary" type="submit">Register</button>
         </div>
+        <a href="/login/" class="link link-primary">
+          Already have a account? Login
+        </a>
       </div>
     </div>
 </form>

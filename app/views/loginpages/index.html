@@ -1,6 +1,7 @@
 {% extends "layouts/root.html" %}
 
 {% block body %}
+<script src="/public/js/app.js"></script>
 <form action="/loginpages/login" method="post" class="hero min-h-screen bg-base-200">
   <div class="hero-content flex-col lg:flex-row-reverse items-start">
     <div class="text-center md:text-left md:max-w-sm">
@@ -17,10 +18,15 @@
           <input type="text" placeholder="email" class="input input-bordered" />
         </div>
         <div class="form-control">
-          <label class="label">
+          <label class="label flex-col items-start" data-show-password>
             <span class="label-text">Password</span>
+            <div class="flex relative items-center w-full">
+              <input type="password" name="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+              <button type="button" onclick="c" class="absolute right-0 ">
+                icon
+              </button>
+            </div>
           </label>
-          <input type="text" placeholder="password" class="input input-bordered" />
           <label class="label">
             <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
           </label>
