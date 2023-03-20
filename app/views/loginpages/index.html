@@ -20,8 +20,14 @@
           <input type="text" placeholder="email" class="input input-bordered" />
         </div>
         <div class="form-control">
-          <label class="label">
+          <label class="label flex-col items-start" data-show-password>
             <span class="label-text">Password</span>
+            <div class="flex relative items-center w-full">
+              <input type="password" name="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+              <button type="button" onclick="c" class="absolute right-0 ">
+                icon
+              </button>
+            </div>
           </label>
           <div class="relative w-full">
             <input type="password" placeholder="password" class="input
