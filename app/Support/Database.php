@@ -84,6 +84,8 @@ class Database
       return $this->statement->execute($values);
     } catch (PDOException $e) {
       error($e, 'ERROR: Something went wrong when executing the sql query');
+      // var_dump($e->getMessage());
+      die();
     }
   }
 
