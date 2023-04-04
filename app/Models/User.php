@@ -4,12 +4,12 @@ namespace App\Models;
 
 class User extends Model
 {
-  static array $fillable = ['username', 'password', 'updated_at', 'created_at'];
+  static array $fillable = ['email', 'password', 'updated_at', 'created_at'];
 
-  public static function findUserByUsername($username)
+  public static function findUserByEmail($email)
   {
-    $user = self::select()->whereRaw('username = :username', ['username' => $username])->get();
-    return $user;
+    $user = self::select()->whereRaw('email = :email', ['email' => $email])->get();
+    return $user[0];
   }
 
   public static function findUserById($id)
@@ -18,12 +18,12 @@ class User extends Model
     return $user;
   }
 
-  public static function createUser($username, $password)
+  public static function createUser($email, $password)
   {
     $hashed = password_hash($password, PASSWORD_DEFAULT);
 
     $user = self::insert([
-      'username' => $username,
+      'email' => $email,
       'password' => $hashed,
     ]);
 

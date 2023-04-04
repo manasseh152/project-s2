@@ -25,11 +25,11 @@ class Register extends Controller
       exit;
     }
 
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    $password2 = $_POST['password2'];
+    $password2 = $_POST['confirmPassword'];
 
-    if (empty($username) || empty($password) || empty($password2)) {
+    if (empty($email) || empty($password) || empty($password2)) {
       $data = [
         'title' => "Register",
         'error' => "Please fill in all fields",
@@ -47,7 +47,7 @@ class Register extends Controller
       exit;
     }
 
-    $user = User::findUserByUsername($username);
+    $user = User::findUserByEmail($email);
 
     if ($user) {
       $data = [
@@ -58,7 +58,7 @@ class Register extends Controller
       exit;
     }
 
-    $user = User::createUser($username, $password);
+    $user = User::createUser($email, $password);
 
     if ($user) {
       header('Location: ' . $_ENV['APP_URL'] . '/login');
