@@ -1,0 +1,19 @@
+{
+	"main": "public/js/index.js",
+	"scripts": {
+		"vite:dev": "vite",
+		"vite:build": "vite build",
+		"serve:dev": "php -S localhost:3000 -t public",
+		"dev": "npm run vite:dev & npm run serve:dev",
+		"build": "npm run vite:build $ npm run serve:dev"
+	},
+	"author": "Manasseh152",
+	"license": "MIT",
+	"devDependencies": {
+		"sass": "^1.60.0",
+		"vite": "^4.2.1"
+	},
+	"dependencies": {
+		"vite-plugin-live-reload": "^3.0.2"
+	}
+}

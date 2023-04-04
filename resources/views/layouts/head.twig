@@ -1,0 +1,11 @@
+{% if globals.isDev %}
+<script type="module" src="http://localhost:5173/@vite/client"></script>
+<script type="module" src="http://localhost:5173/ts/main.ts"></script>
+{% else %}
+<script type="module" crossorigin src="{{ globals.js }}"></script>
+{% for preload in globals.preloads %}
+<link rel="modulepreload" href="{{ preload }}" />
+{% endfor %} {% for css in globals.css %}
+<link rel="stylesheet" href="{{ css }}" />
+{% endfor %} {% endif %} {% set title = title ?? globals.appName %}
+<title>{{ title }}</title>
