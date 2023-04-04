@@ -1,7 +1,0 @@
-node_modules
-app/config/config.php
-/vendor/
-output.css
-package-lock.json
-composer-lock.json
-.env
