@@ -153,6 +153,20 @@ class Model
     return $model;
   }
 
+   public static function update($id, $data)
+  {
+    if(!self::$databaseTable) {
+      self::setTable();
+    }
+    foreach ($data as $key => $value) {
+      if (!in_array($key, static::$fillable)) {
+        die("The column {$key} is not mass assignable or does not exist");
+      }
+    }
+    return (new QueryBuilder(static::$databaseTable, static::$primaryKey, static::$databaseName))
+              ->update($data, $id);
+  }
+
   public function setAttributes($attributes)
   {
     foreach ($attributes as $key => $attribute)

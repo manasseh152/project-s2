@@ -303,10 +303,14 @@ class QueryBuilder
   {
     $placeholders = '';
     foreach ($data as $key => $value) {
-      if (!in_array($key, $this->fillables)) {
-        die("This column name is not mass assignable or does not exist");
+      // if (!in_array($key, $this->fillables)) {
+      //   die("The column {$key} is not mass assignable or does not exist");
+      // }
+      $placeholders .= $key . ' = :' . $key;
+      // add a comma if there are more columns to update
+      if (next($data)) {
+        $placeholders .= ', ';
       }
-      $placeholders .= $key . ' = :' . $key . ', ';
     }
     $this->db->query('UPDATE ' . $this->databaseTable . ' SET ' . $placeholders . '  WHERE ' . $this->primaryKey . ' = ' . $id);
     foreach ($data as $key => $value) {

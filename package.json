@@ -4,7 +4,7 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
-    "dev:serve": "php -S localhost:3005 -t public",
+    "dev:serve": "php -S localhost:3000 -t public",
     "dev:style": "postcss ./public/css/input.css -o ./public/css/output.css --watch",
     "dev": "npm run dev:serve & npm run dev:style",
     "build": "postcss ./public/css/input.css -o ./public/css/output.css"

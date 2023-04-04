@@ -15,23 +15,26 @@
 		<div id="item4" class="carousel-item w-full">
 			<img src="https://picsum.photos/1920/1080" class="w-full object-cover" />
 		</div>
+		<div id="item4" class="carousel-item w-full">
+			<img src="https://picsum.photos/1920/1080" class="w-full object-cover" />
+		</div>
 	</div>
 	<div class="flex justify-center w-full py-2 gap-2">
 		<a href="#item1" class="btn btn-xs">1</a>
 		<a href="#item2" class="btn btn-xs">2</a>
 		<a href="#item3" class="btn btn-xs">3</a>
 		<a href="#item4" class="btn btn-xs">4</a>
+		<a href="#item4" class="btn btn-xs">5</a>
 	</div>
 
-	<input type="checkbox" id="my-modal" class="modal-toggle" />
-	<div class="modal">
-		<div class="modal-box">
-			<h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
-			<p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-			<div class="modal-action">
-				<label for="my-modal" class="btn btn-primary">Yay!</label>
-			</div>
-		</div>
-	</div>
+
+	<style>
+	.box{
+		 display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  white-space: 0;
+	}
+</style>
 </div>
 {% endblock %}

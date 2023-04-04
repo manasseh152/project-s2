@@ -15,25 +15,24 @@ function GetSWE() {
 .then(data => console.log(data));
 }
 
-// Show Password buttons with data attribute: data-show-password
-const showPassword = document.querySelectorAll('[data-show-password]');
-showPassword.forEach((el) => {
-  // get the child button element
-  const button = el.querySelector('button');
-  // get the child input element
-  const input = el.querySelector('input');
-
-  // add event listener to the button
-  button.addEventListener('click', (e) => {
-    // prevent default behaviour
-    e.preventDefault();
-
-    // toggle the input type
-    if (input.getAttribute('type') === 'password') {
-      input.setAttribute('type', 'text');
-    } else {
-      input.setAttribute('type', 'password');
-    }
+function showPassword() {
+  var x = document.getElementById("wachtwoord");
+  if (x.type === "password") {
+    x.type = "text";
+    document.getElementById("showButton").innerHTML = "Hide";
+  } else {
+    x.type = "password";
+    document.getElementById("showButton").innerHTML = "Show";
   }
-  );
-});
+}
+
+function showConfirmPassword() {
+  var x = document.getElementById("wachtwoord2");
+  if (x.type === "password") {
+    x.type = "text";
+    document.getElementById("showButton2").innerHTML = "Hide";
+  } else {
+    x.type = "password";
+    document.getElementById("showButton2").innerHTML = "Show";
+  }
+}
