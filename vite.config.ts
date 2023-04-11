@@ -13,7 +13,7 @@ export default defineConfig({
 		manifest: true,
 		rollupOptions: {
 			input: {
-				main: "/home/m-stam/Public/php/project-s2/resources/ts/main.ts",
+				main: "./resources/ts/main.ts",
 			},
 		},
 	},

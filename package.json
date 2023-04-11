@@ -2,7 +2,7 @@
 	"main": "resources/ts/main.ts",
 	"scripts": {
 		"vite:dev": "vite",
-		"vite:build": "vite build --config /home/m-stam/Public/php/project-s2/vite.config.ts",
+		"vite:build": "vite build",
 		"serve:dev": "php -S localhost:3000 -t public",
 		"dev": "npm run build; npm run vite:dev & npm run serve:dev",
 		"build": "npm run vite:build $ npm run serve:dev"
