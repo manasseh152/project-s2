@@ -12,16 +12,36 @@ use App\Libraries\Database;
  * $example->getAll();
  * @package App\Models
  */
-class Example extends Database
+class Example
 {
+  private static Database $db;
+  private static ?Example $instance = null;
+
+  public function __construct()
+  {
+    self::$db = Database::getInstance();
+  }
+
+  /**
+   * Returns a singleton instance of the Example class.
+   * @return Example
+   */
+  public static function getInstance(): Example
+  {
+    if (self::$instance === null) {
+      self::$instance = new Example();
+    }
+    return self::$instance;
+  }
+
   /**
    * Gets all the records from the example table.
    * @return array
    */
   public function getAll(): array
   {
-    $this->query('SELECT * FROM example');
-    return $this->resultSet();
+    $this->db->query('SELECT * FROM example');
+    return $this->db->resultSet();
   }
 
   /**
@@ -31,9 +51,9 @@ class Example extends Database
    */
   public function get(int $id): object
   {
-    $this->query('SELECT * FROM example WHERE id = :id');
-    $this->bind(':id', $id);
-    return $this->single();
+    $this->db->query('SELECT * FROM example WHERE id = :id');
+    $this->db->bind(':id', $id);
+    return $this->db->single();
   }
 
   /**
@@ -43,9 +63,9 @@ class Example extends Database
    */
   public function insert(string $name): bool
   {
-    $this->query('INSERT INTO example (name) VALUES (:name)');
-    $this->bind(':name', $name);
-    return $this->execute();
+    $this->db->query('INSERT INTO example (name) VALUES (:name)');
+    $this->db->bind(':name', $name);
+    return $this->db->execute();
   }
 
   /**
@@ -56,10 +76,10 @@ class Example extends Database
    */
   public function update(int $id, string $name): bool
   {
-    $this->query('UPDATE example SET name = :name WHERE id = :id');
-    $this->bind(':id', $id);
-    $this->bind(':name', $name);
-    return $this->execute();
+    $this->db->query('UPDATE example SET name = :name WHERE id = :id');
+    $this->db->bind(':id', $id);
+    $this->db->bind(':name', $name);
+    return $this->db->execute();
   }
 
   /**
@@ -69,8 +89,8 @@ class Example extends Database
    */
   public function delete(int $id): bool
   {
-    $this->query('DELETE FROM example WHERE id = :id');
-    $this->bind(':id', $id);
-    return $this->execute();
+    $this->db->query('DELETE FROM example WHERE id = :id');
+    $this->db->bind(':id', $id);
+    return $this->db->execute();
   }
 }
