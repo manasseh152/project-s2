@@ -140,6 +140,8 @@ class Core
       'js' => jsUrl($_ENV['VITE_ENTRY'] . '.ts'),
       'preloads' => importsUrls($_ENV['VITE_ENTRY'] . '.ts'),
       'css' => cssUrls($_ENV['VITE_ENTRY'] . '.css'),
+      'viteHost' => $_ENV['VITE_HOST'],
+      'viteEntry' => $_ENV['VITE_ENTRY'],
     ]);
   }
 

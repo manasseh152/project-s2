@@ -1,0 +1,19 @@
+{% include "layouts/base.twig" %} {% block body %}
+<main>
+	<form action="/auth/register" method="post" class="flex flex-col">
+		<label>
+			<span>Email</span>
+			<input type="email" name="email" />
+		</label>
+		<label>
+			<span>Password</span>
+			<input type="password" name="password" />
+		</label>
+		<label>
+			<span>Confirm Password</span>
+			<input type="password" name="password_confirmation" />
+		</label>
+		<button type="submit">Register</button>
+	</form>
+</main>
+{% endblock %}

@@ -1,19 +1,25 @@
 {
-	"main": "public/js/index.js",
+	"main": "resources/ts/main.ts",
 	"scripts": {
 		"vite:dev": "vite",
-		"vite:build": "vite build",
+		"vite:build": "vite build --config /home/m-stam/Public/php/project-s2/vite.config.ts",
 		"serve:dev": "php -S localhost:3000 -t public",
-		"dev": "npm run vite:dev & npm run serve:dev",
+		"dev": "npm run build; npm run vite:dev & npm run serve:dev",
 		"build": "npm run vite:build $ npm run serve:dev"
 	},
 	"author": "Manasseh152",
 	"license": "MIT",
 	"devDependencies": {
+		"autoprefixer": "^10.4.14",
+		"postcss": "^8.4.21",
 		"sass": "^1.60.0",
+		"tailwindcss": "^3.3.1",
+		"typescript": "^5.0.3",
 		"vite": "^4.2.1"
 	},
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.9",
+		"daisyui": "^2.51.5",
 		"vite-plugin-live-reload": "^3.0.2"
 	}
 }

@@ -6,10 +6,12 @@ use Dotenv\Dotenv;
 
 use App\Libraries\Core;
 
+
 class Application
 {
   public static function init()
   {
+    session_start();
     self::loadEnv();
     $init = new Core();
   }

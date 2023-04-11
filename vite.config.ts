@@ -5,9 +5,7 @@ import path from "path";
 export default defineConfig({
 	root: "./resources",
 	base: "/",
-
 	plugins: [liveReload("./resources/views/**/*.twig")],
-
 	build: {
 		outDir: "../public/dist",
 		emptyOutDir: true,
@@ -15,7 +13,7 @@ export default defineConfig({
 		manifest: true,
 		rollupOptions: {
 			input: {
-				main: path.resolve(__dirname, "resources/ts/main.ts"),
+				main: "/home/m-stam/Public/php/project-s2/resources/ts/main.ts",
 			},
 		},
 	},
@@ -24,7 +22,6 @@ export default defineConfig({
 			"@": path.resolve(__dirname, "resources"),
 		},
 	},
-
 	server: {
 		cors: true,
 	},

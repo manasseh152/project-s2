@@ -1,5 +1,10 @@
 {% include "layouts/base.twig" %} {% block body %}
 <main class="flex justify-center items-center w-full h-full">
-	<h1>Hello World!</h1>
+	<h1>{{ title }}</h1>
+	<span>
+		{% for msg in messages %}
+		<p>{{ msg }}</p>
+		{% endfor %}
+	</span>
 </main>
 {% endblock %}

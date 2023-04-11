@@ -11,6 +11,8 @@ use PDOStatement;
  */
 class Database
 {
+  private static ?Database $instance = null;
+
   private PDO $dbHandler;
   private PDOStatement $statement;
   private string $host;
@@ -23,8 +25,21 @@ class Database
     $this->host = $_ENV['DB_HOST'];
     $this->dbName = $_ENV['DB_NAME'];
     $this->user = $_ENV['DB_USER'];
-    $this->password = $_ENV['DB_PASSWORD'];
+    $this->password = $_ENV['DB_PASS'];
     $this->connect();
+  }
+
+  /**
+   * Returns a singleton instance of the Database class.
+   *
+   * @return Database
+   */
+  public static function getInstance(): Database
+  {
+    if (self::$instance === null) {
+      self::$instance = new Database();
+    }
+    return self::$instance;
   }
 
   /**
@@ -38,7 +53,11 @@ class Database
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
       PDO::ATTR_EMULATE_PREPARES => false,
     ];
-    $this->dbHandler = new PDO($dsn, $this->user, $this->password, $options);
+    try {
+      $this->dbHandler = new PDO($dsn, $this->user, $this->password, $options);
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
   }
 
   /**
